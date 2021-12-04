@@ -1,13 +1,20 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+In this project we will create a Website using Azure App Service.
+
+#  What is Azure App Service?
+Azure App Service is a Platform as a Service (PaaS), in other words it is a fully managed platform used for hosting web applications, like this one below, Mobile Apps, Logic Apps, API Apps and Function Apps.
+
+# Why Should you use Infrastructure as Code?
+Infrastructure as code (IaC) enables you to automatically provision your environment with no manual intervention. For this demo we use JSON however the same resources can be deployed using different languages such as Bicep or Terraform.
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+To deploy your first website using Azure App Service you will need
+1. Azure Subscription https://azure.microsoft.com/en-us/free/
+2. Visual Studio Code https://code.visualstudio.com/download
+3. GitHub Repository
 
+# Architecture Design
+![Test Image 4](https://github.com/SoniaConti/ContosoFinance-Demo/blob/main/ContosoFinance-Demo-ARM/Images/ArchitectureDesginDiagram.PNG)
 # Build and Test
 TODO: Describe and show how to build your code and run the tests. 
 

@@ -1,1 +1,1 @@
-Run deploy.ps1 to deploy the following 
+This folder contains the template.json and parameter.json to deploy Azure Resoucres.

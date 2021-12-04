@@ -1,22 +1,20 @@
 <#
  .SYNOPSIS
     Deploys a template to Azure
-
-#>
-
-<#
-.SYNOPSIS
-    Registers RPs
 #>
 
 
-$subscriptionId = "4ae8209e-3244-4e03-bea5-1967328bb3a9"
-$resourceGroupName = "ContosoFinance-Demo-rg"
-$resourceGroupLocation = "WestEurope"
 
-#PaaS
-$templateFilePath = "C:\Users\sonia.schembri\Documents\Azure DevOps Repo\sonia-conti\ContosoFinance-Demo-ARM\ARM-Templates\AzureStack\PaaS\template.json"
-$parametersFilePath = "C:\Users\sonia.schembri\Documents\Azure DevOps Repo\sonia-conti\ContosoFinance-Demo-ARM\ARM-Templates\AzureStack\PaaS\paramters.json"
+$subscriptionId = "4ae8209e-3244-4e03-bea5-1967328bb3a9" #insert your subscription ID
+$resourceGroupName = "ContosoFinance-Demo-rg"  #provide resource group name
+$resourceGroupLocation = "WestEurope"  #location
+
+# The below  file can be used if the templates are stored locally 
+#$templateFilePath = "ContosoFinance-Demo-ARM\ARM-Templates\template.json"
+#$parametersFilePath = "ContosoFinance-Demo-ARM\ARM-Templates\paramters.json"
+
+$templateFileURI = 'https://github.com/SoniaConti/ContosoFinance-Demo/blob/main/ContosoFinance-Demo-ARM/ARM-Templates/paramters.json'
+$parameterFileURI = 'https://github.com/SoniaConti/ContosoFinance-Demo/blob/main/ContosoFinance-Demo-ARM/ARM-Templates/paramters.json'
 
 
 Function RegisterRP {
@@ -65,10 +63,26 @@ else{
     Write-Host "Using existing resource group '$resourceGroupName'";
 }
 
-# Start the deployment
+
+# Start the deployment from Remote Template
+Write-Host "Starting deployment...";
+if(Test-Path $parametersFilePath) {
+    New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $templateFileURI -TemplateParameterFile $parametersFileURI -Verbose;
+} else {
+    New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFileURI-Verbose;
+}
+
+
+
+<#
+
+# Start the deployment from Local File
+
 Write-Host "Starting deployment...";
 if(Test-Path $parametersFilePath) {
     New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFilePath -TemplateParameterFile $parametersFilePath -Verbose;
 } else {
     New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFilePath -Verbose;
 }
+
+#>
