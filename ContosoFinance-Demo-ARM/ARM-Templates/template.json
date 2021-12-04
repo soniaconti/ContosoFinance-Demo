@@ -15,42 +15,49 @@
         "description": "Select Location to deploy resouces"
       }
     },
+    "ProjectName": {
+      "type": "string",
+      "defaultValue": "ContosoFinance-Demo",
+      "metadata": {
+        "description": "Select name Project, all reosuces will be deployed following the naming convention using this projectname"
+      }
 
-  "hostingPlanName":{
-     "type": "string",
+    },
+    "hostingPlanName": {
+      "type": "string",
       "defaultValue": "IaC-Demo-Plan",
       "metadata": {
         "description": "Select name for App Service Plan"
       }
     },
 
-     "webappname":{
-     "type": "string",
+    "webappname": {
+      "type": "string",
       "defaultValue": "IaC-Demo-site",
       "metadata": {
         "description": "Select name for Web App"
       }
     },
 
-    
-     "apiname":{
-     "type": "string",
+
+    "apiname": {
+      "type": "string",
       "defaultValue": "IaC-Demo-Api",
       "metadata": {
         "description": "Select name for API App"
       }
     },
 
-     "sqlserverName":{
-     "type": "string",
+    "sqlserverName": {
+      "type": "string",
       "defaultValue": "IaC-Demo-sql",
       "metadata": {
         "description": "Select name for SQL Server"
       }
     },
 
-     "databaseName":{
-     "type": "string",
+    "databaseName": {
+      "type": "string",
       "defaultValue": "iacdemodb",
       "metadata": {
         "description": "Select name for database"
@@ -101,8 +108,19 @@
       }
     }
   },
-  "variables": {
-   "repoURL": "https://github.com/SoniaConti/ContosoFinance-Demo/blob/06722a651ae992e377aa3c0853f6aca12c6734fc/ContosoFinance-Demo-Web",
+  "variables": {   
+    "hostingplanname": "[concat(parameters('ProjectName'),'-Plan')]",
+    "webappname": "[concat(parameters('ProjectName'),'-Site')]",
+    "apiname": "[concat(parameters('ProjectName'),'-Api')]",
+    "sqlservername": "[concat(parameters('ProjectName'),'-Sql')]",
+
+    "removeChar1": "[replace(parameters('ProjectName'), '-', '')]",
+    "removeChar2": "[replace(variables('removeChar1'), ' ', '')]",
+    "removeChar3": "[replace(variables('removeChar2'), '^', '')]",
+    "cleanString": "[replace(variables('removeChar3'), ')', '')]",
+    "databasename": "[tolower(concat(variables('cleanString'),'db'))]",
+
+    "repoURL": "https://github.com/SoniaConti/ContosoFinance-Demo.git",
     "branch": "master",
     "APIrepoURL": "https://github.com/SoniaConti/ContosoFinance-Demo/blob/ebefb4fc3daa537b831d4cf4d7efa4f2bf16c268/ContosoFinance-Demo-API"
 
@@ -166,63 +184,63 @@
         "capacity": "[parameters('skuCapacity')]"
       }
     },
+    {
+      "type": "Microsoft.Web/sites",
+      "name": "[parameters('webappname')]",
+      "apiVersion": "2020-12-01",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
+
+      ],
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
+      },
+      "resources": [
         {
-            "type": "Microsoft.Web/sites",
-            "name": "[parameters('webappname')]",
-            "apiVersion": "2020-12-01",
-            "location": "[resourceGroup().location]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
-             
-            ],
-            "properties": {
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
-            },
-            "resources": [
-                {
-                    "apiVersion": "2020-12-01",
-                    "name": "web",
-                    "type": "sourcecontrols",
-                    "dependsOn": [
-                        "[resourceId('Microsoft.Web/Sites', parameters('webappname'))]"
-                    ],
-                    "properties": {
-                        "RepoUrl": "[variables('repoURL')]",
-                        "branch": "[variables('branch')]",
-                        "IsManualIntegration": true
+          "apiVersion": "2020-12-01",
+          "name": "web",
+          "type": "sourcecontrols",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites', parameters('webappname'))]"
+          ],
+          "properties": {
+            "RepoUrl": "[variables('repoURL')]",
+            "branch": "[variables('branch')]",
+            "IsManualIntegration": true
 
-                    }
-                },
-
-                {
-                    "apiVersion": "2015-08-01",
-                    "type": "config",
-                    "name": "appsettings",
-                    "dependsOn": [
-                       "[resourceId('Microsoft.Web/Sites', parameters('webappname'))]",
-                       "[resourceId('Microsoft.Web/Sites', parameters('apiname'))]"
-                    ],
-                    "properties": {
-                        "offersAPIUrl" : "[concat('https://',parameters('apiname'), '.appservice.azurewebsites.net/api/get')]"
-                          }
-                },
-
-                {
-                    "apiVersion": "2015-08-01",
-                    "type": "config",
-                    "name": "connectionstrings",
-                    "dependsOn": [
-                        "[concat('Microsoft.Web/sites/', parameters('webappname'))]"
-                    ],
-                    "properties": {
-                        "ContosoFinance": {
-                            "value": "[concat('Data Source=iac-demo-sql.database.windows.net,1433;Initial Catalog=', parameters('databaseName'), ';User ID=', parameters('sqlAdministratorLogin'),';Password=', parameters('sqlAdministratorLoginPassword'), ';')]",
-                            "type": "SQLAzure"
-                        }
-                    }
-                }
-            ]
+          }
         },
+
+        {
+          "apiVersion": "2015-08-01",
+          "type": "config",
+          "name": "appsettings",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites', parameters('webappname'))]",
+            "[resourceId('Microsoft.Web/Sites', parameters('apiname'))]"
+          ],
+          "properties": {
+            "offersAPIUrl": "[concat('https://',parameters('apiname'), '.appservice.azurewebsites.net/api/get')]"
+          }
+        },
+
+        {
+          "apiVersion": "2015-08-01",
+          "type": "config",
+          "name": "connectionstrings",
+          "dependsOn": [
+            "[concat('Microsoft.Web/sites/', parameters('webappname'))]"
+          ],
+          "properties": {
+            "ContosoFinance": {
+              "value": "[concat('Data Source=',parameters('sqlserverName'),'.database.windows.net,1433;Initial Catalog=', parameters('databaseName'), ';User ID=', parameters('sqlAdministratorLogin'),';Password=', parameters('sqlAdministratorLoginPassword'), ';')]",
+              "type": "SQLAzure"
+            }
+          }
+        }
+      ]
+    },
 
     {
       "type": "Microsoft.Web/sites",
@@ -263,7 +281,7 @@
           ],
           "properties": {
             "ContosoFinance": {
-              "value": "[concat('Data Source=iac-demo-sql.database.windows.net,1433;Initial Catalog=', parameters('databaseName'), ';User ID=', parameters('sqlAdministratorLogin'),';Password=', parameters('sqlAdministratorLoginPassword'), ';')]",
+              "value": "[concat('Data Source=',parameters('sqlserverName'),'.database.windows.net,1433;Initial Catalog=', parameters('databaseName'), ';User ID=', parameters('sqlAdministratorLogin'),';Password=', parameters('sqlAdministratorLoginPassword'), ';')]",
               "type": "SQLAzure"
             }
           }
