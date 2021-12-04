@@ -221,7 +221,7 @@
             "[resourceId('Microsoft.Web/Sites', parameters('apiname'))]"
           ],
           "properties": {
-            "offersAPIUrl": "[concat('https://',parameters('apiname'), '.appservice.azurewebsites.net/api/get')]"
+            "offersAPIUrl": "[concat('https://',parameters('apiname'), '.azurewebsites.net/api/get')]"
           }
         },
 
