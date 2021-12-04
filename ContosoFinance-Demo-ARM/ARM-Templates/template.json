@@ -33,7 +33,7 @@
 
     "webappname": {
       "type": "string",
-      "defaultValue": "ContosoFinance-Demo-site",
+      "defaultValue": "ContosoFinance-Demo-Site",
       "metadata": {
         "description": "Select name for Web App"
       }
@@ -50,7 +50,7 @@
 
     "sqlserverName": {
       "type": "string",
-      "defaultValue": "ContosoFinance-Demo-sql",
+      "defaultValue": "ContosoFinance-Demo-Sql",
       "metadata": {
         "description": "Select name for SQL Server"
       }

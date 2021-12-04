@@ -12,10 +12,10 @@
             "value": "ContosoFinance-Demo-Site"
         },
         "apiname": {
-            "value": "ContosoFinance-Demo-api"
+            "value": "ContosoFinance-Demo-Api"
         },
         "sqlservername": {
-            "value": "ContosoFinance-Demo-sql"
+            "value": "ContosoFinance-Demo-Sql"
         },
         "databasename": {
             "value": "contosofinancedemodb"
