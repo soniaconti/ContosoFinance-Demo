@@ -14,7 +14,8 @@ To deploy your first website using Azure App Service you will need
 3. GitHub Repository
 
 # Architecture Design
-![Test Image 4](https://github.com/SoniaConti/ContosoFinance-Demo/blob/main/ContosoFinance-Demo-ARM/Images/ArchitectureDesginDiagram.PNG)
+![ArchitectureDesignDiagram](https://github.com/SoniaConti/ContosoFinance-Demo/blob/main/ContosoFinance-Demo-ARM/Images/ArchitectureDesginDiagram.PNG)
+
 # Build and Test
 TODO: Describe and show how to build your code and run the tests. 
 
