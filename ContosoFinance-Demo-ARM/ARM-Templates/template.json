@@ -102,9 +102,10 @@
     }
   },
   "variables": {
-    "APIrepoURL": "https://soniaconti@dev.azure.com/soniaconti/IaC-Demo/_git/IaC-Demo-OfferAPI/",
-    "repoURL": "https://soniaconti@dev.azure.com/soniaconti/IaC-Demo/_git/IaC-Demo-Web",
-    "branch": "master"
+   "repoURL": "https://github.com/SoniaConti/ContosoFinance-Demo/blob/06722a651ae992e377aa3c0853f6aca12c6734fc/ContosoFinance-Demo-Web",
+    "branch": "master",
+    "APIrepoURL": "https://github.com/SoniaConti/ContosoFinance-Demo/blob/ebefb4fc3daa537b831d4cf4d7efa4f2bf16c268/ContosoFinance-Demo-API"
+
   },
   "resources": [
     {

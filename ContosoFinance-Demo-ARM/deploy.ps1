@@ -14,7 +14,7 @@ $resourceGroupLocation = "WestEurope"  #location
 #$parametersFilePath = "ContosoFinance-Demo-ARM\ARM-Templates\paramters.json"
 
 $templateFileURI = 'https://github.com/SoniaConti/ContosoFinance-Demo/blob/main/ContosoFinance-Demo-ARM/ARM-Templates/paramters.json'
-$parameterFileURI = 'https://github.com/SoniaConti/ContosoFinance-Demo/blob/main/ContosoFinance-Demo-ARM/ARM-Templates/paramters.json'
+$parametersFileURI = 'https://github.com/SoniaConti/ContosoFinance-Demo/blob/main/ContosoFinance-Demo-ARM/ARM-Templates/paramters.json'
 
 
 Function RegisterRP {
@@ -23,7 +23,7 @@ Function RegisterRP {
     )
 
     Write-Host "Registering resource provider '$ResourceProviderNamespace'";
-    Register-AzureRmResourceProvider -ProviderNamespace $ResourceProviderNamespace;
+    Register-AzResourceProvider -ProviderNamespace $ResourceProviderNamespace;
 }
 
 #******************************************************************************
@@ -66,10 +66,10 @@ else{
 
 # Start the deployment from Remote Template
 Write-Host "Starting deployment...";
-if(Test-Path $parametersFilePath) {
-    New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $templateFileURI -TemplateParameterFile $parametersFileURI -Verbose;
+if(Test-Path $parametersFileURI) {
+    New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $templateFileURI -ParameterUri $parametersFileURI -Verbose;
 } else {
-    New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFileURI-Verbose;
+    New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $templateFileURI -Verbose;
 }
 
 
