@@ -1,0 +1,36 @@
+﻿@model ContosoFinance.Apps.Web.Models.OrderModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section HeaderOverlay {
+    <div class="button-wrapper">
+        <div class="container">
+            <div class="row">
+                <a href="#" class="btn-content">Application Submitted</a>
+            </div>
+        </div>
+    </div>
+}
+
+<section class="store">
+    <div class="container">
+        <div class="row">
+            <div class="wrapper clearfix">
+
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Success!</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Thank you! Your application has been submitted.</p>
+                        <p><br /></p>
+                        <p><a href="@Url.Action("Index", "Home")" class="btn red-btn">Return Home</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

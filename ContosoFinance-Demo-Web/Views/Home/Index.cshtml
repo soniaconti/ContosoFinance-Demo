@@ -1,0 +1,106 @@
+﻿@model ContosoFinance.Apps.Web.Models.HomeModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@section HeaderOverlay {
+    <div class="button-wrapper">
+        <div class="container">
+            <div class="row">
+                <a href="#" class="btn-content">FLOW FITNESS</a>
+            </div>
+            <div class="row clearfix">
+                <p><br /></p>
+                <p><br /></p>
+                <p><a href="@Url.Action("Index", "Store")" class="btn red-btn">Join Us Today</a></p>
+            </div>
+        </div>
+    </div>
+}
+
+<section class="store">
+    <div class="container">
+        <div class="row">
+            <div class="wrapper clearfix">
+                <aside class="content contact-wrap">
+                    <div class="store-details-wrap clearfix">
+                        <div class="shop-related clearfix">
+                            <h2>Our Memberships</h2>
+                            <p>Access to all our clubs | Open Monday to Sunday</p>
+                            <p><br /></p>
+
+                            <div id="offers" data-bind="foreach: offers">
+                                <div class="figure">
+                                    <div class="item">
+                                        <div class="item-content">
+                                            <div class="item-header clearfix">
+                                                <span class="headline-lato" data-bind="text: ProductName"></span>
+                                                <span data-bind="text: Rate + '%'"></span>
+                                            </div>
+                                            <p>
+                                                <a data-bind="attr: {'href':  '/Store/Details/' + ProductID}" class="btn trans-btn">Product Details</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/Scripts/vendor/knockout-3.3.0.js"></script>
+
+    <script type="text/javascript">
+        var offersUri = '@System.Configuration.ConfigurationManager.AppSettings["offersAPIUrl"]';
+        var viewModel = {
+            offers: ko.observableArray()
+        };
+
+        $(document).ready(function () {
+            // Call the Offers service and populate the offers list:
+            var jqxhr = $.get(offersUri, function (data) {
+                // Success: Bind the data to our viewmodel.
+                viewModel.offers(data);
+            })
+            .fail(function (req, status, err) {
+                if (req.readyState == 0 || req.status == 0) {
+                    // Most likely a CORS issue where this domain has not been added
+                    // by the destination server.
+                    alert('An error has occurred while retrieving the latest offered products. It appears as though CORS has not been configured.');
+                }
+                else if (err != null && err != '') {
+                    alert('An error has occurred while retrieving the latest offered products: ' + err)
+                }
+            });
+
+            // TODO: Throw alert on error
+
+            ko.applyBindings(viewModel);
+        });
+
+        ko.bindingHandlers.money = {
+            update: function (element, valueAccessor, allBindingsAccessor) {
+                var value = valueAccessor(), allBindings = allBindingsAccessor();
+                var valueUnwrapped = ko.utils.unwrapObservable(value);
+
+                var m = "";
+                var out = "";
+                if (valueUnwrapped) {
+                    m = parseFloat(valueUnwrapped);
+                    if (m) {
+                        out = '$' + m.toMoney(2);
+                    }
+                }
+                $(element).text(out);
+            }
+        };
+
+    </script>
+}

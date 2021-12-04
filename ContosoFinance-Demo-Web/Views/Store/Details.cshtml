@@ -1,0 +1,148 @@
+﻿@model ContosoFinance.Apps.Web.Models.StoreDetailsModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@section HeaderOverlay {
+<div class="button-wrapper">
+    <div class="container">
+        <div class="row">
+            <a href="#" class="btn-content">FLow Fitness Memberships</a>
+        </div>
+    </div>
+</div>
+}
+
+<section class="store">
+    <div class="container">
+        <div class="row">
+            <div class="wrapper clearfix">
+                <aside class="content contact-wrap">
+                    <div class="store-details-wrap clearfix">
+                        <div class="fig-shop clearfix">
+                            <aside class="fig-shop-content">
+                                <h4 class="headline-lato">@Model.Product.ProductName</h4>
+                                <h5>
+                                    Rate: 	&euro;50
+                                    @if (Model.Product.CategoryID == 1)
+                                    {
+                                        
+                                    }
+                                 </h5>
+                                <div class="avilable-wrap clearfix">
+                                    <div class="avl-wrp">
+                                        <span>availability:</span>
+                                        <span>5 spots remaining</span>
+                                    </div>
+                                    <a class="btn btn-small btn-red" href="@Url.Action("AddToCart", "Cart", new { productId = Model.Product.ProductID })">Add to cart</a>
+                                </div>
+                            </aside>
+                        </div>
+                        <div class="tab-shop clearfix">
+                            <div role="tabpanel">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
+                                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Additional information</a></li>
+                                    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">reviews (12)</a></li>
+                                </ul>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="home">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</div>
+                                    <div role="tabpanel" class="tab-pane" id="profile">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </div>
+                                    <div role="tabpanel" class="tab-pane" id="messages">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="shop-related clearfix">
+                            <h6>related products</h6>
+                            @foreach (var product in Model.RelatedProducts)
+                            {
+                                <div class="figure">
+                                    <div class="item">
+                                        <div class="item-img">
+                                            <div class="item-cart">
+                                                <a href="@Url.Action("AddToCart", "Cart", new { productId = product.ProductID })">Add to cart</a>
+                                            </div>
+                                        </div>
+                                        <div class="item-content">
+                                            <div class="item-header clearfix">
+                                                <span class="headline-lato">@product.ProductName</span>
+                                                <span class="">
+                                                    Rate: &euro;150
+                                                    @if (product.CategoryID == 1)
+                                                    {
+                                                        <text>
+                                                         
+                                                        </text>
+                                                    }
+                                                </span>
+                                            </div>
+                                            <p>
+                                                <a href="@Url.Action("Details", "Store", new { id = product.ProductID })" class="btn trans-btn">Product Details</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                </aside>
+                <aside class="sidebar">
+                    <div class="item-menu">
+                        <div class="item-menu-wrap">
+                            <h5>Categories</h5>
+                            <ul class="category">
+                                @foreach (var category in Model.Categories)
+                                {
+                                    <li><a href="#">@category.CategoryName</a></li>
+                                }
+                            </ul>
+                        </div>
+
+                    </div><!--  End of item-menu -->
+                    <div class="item-menu ">
+                        <div class="item-menu-wrap">
+                            <h5>New items</h5>
+                            @foreach (var product in Model.NewProducts)
+                            {
+                                <div class="item-wrap clearfix">
+                                    <div class="item-content">
+                                        <h6><a href="@Url.Action("Details", "Store", new { id = product.ProductID })">@product.ProductName</a></h6>
+                                        <p>
+                                             Rate: &euro;150
+                                                    @if (product.CategoryID == 1)
+                                                    {
+                                                        <text>
+                                                         
+                                                        </text>
+                                                    }
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div><!--  End of item-menu -->
+                    <div class="item-menu">
+                        <div class="item-menu-wrap">
+                            <h5>League Photos</h5>
+                            <ul class="item-photo clearfix">
+                                <li><a href=""><img src="@Url.Content("~/images/photo/lacrosse.jpg")" alt="image"></a></li>
+                                <li><a href=""><img src="@Url.Content("~/images/photo/mens-volleyball.jpg")" alt="image"></a></li>
+                                <li><a href=""><img src="@Url.Content("~/images/photo/rugby.jpg")" alt="image"></a></li>
+                                <li><a href=""><img src="@Url.Content("~/images/photo/rugby-league.jpg")" alt="image"></a></li>
+                                <li><a href=""><img src="@Url.Content("~/images/photo/soccer.jpg")" alt="image"></a></li>
+                                <li><a href=""><img src="@Url.Content("~/images/photo/youth-baseball.jpg")" alt="image"></a></li>
+
+                            </ul>
+                        </div>
+                    </div><!--  End of item-menu -->
+                </aside>
+            </div>
+
+        </div>
+    </div>
+</section>
