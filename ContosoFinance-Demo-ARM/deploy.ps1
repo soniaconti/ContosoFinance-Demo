@@ -10,11 +10,11 @@ $resourceGroupName = "ContosoFinance-Demo-rg"  #provide resource group name
 $resourceGroupLocation = "WestEurope"  #location
 
 # The below  file can be used if the templates are stored locally 
- $templateFilePath = "ContosoFinance-Demo-ARM\ARM-Templates\template.json"
- $parametersFilePath = "ContosoFinance-Demo-ARM\ARM-Templates\paramters.json"
+# $templateFilePath = "ContosoFinance-Demo-ARM\ARM-Templates\template.json"
+# $parametersFilePath = "ContosoFinance-Demo-ARM\ARM-Templates\paramters.json"
 
 $templateFileURI = 'https://raw.githubusercontent.com/SoniaConti/ContosoFinance-Demo/main/ContosoFinance-Demo-ARM/ARM-Templates/template.json'
-$parametersFileURI = 'https://raw.githubusercontent.com/SoniaConti/ContosoFinance-Demo/main/ContosoFinance-Demo-ARM/ARM-Templates/template.json'
+$parametersFileURI = 'https://raw.githubusercontent.com/SoniaConti/ContosoFinance-Demo/main/ContosoFinance-Demo-ARM/ARM-Templates/paramters.json'
 
 
 Function RegisterRP {
@@ -64,21 +64,17 @@ else{
 }
 
 
-# Start the deployment from Remote Template - CHECK
-Write-Host "Starting deployment...";
-if(Test-Path $parametersFileURI) {
-    New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $templateFileURI -ParameterUri $parametersFileURI -Verbose;
-} else {
-    New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $templateFileURI -Verbose;
-}
+# Start the deployment from Remote Template 
+Write-Host "Starting deployment from Github Repo...";
+New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri $templateFileURI -TemplateParameterUri $parametersFileURI -Verbose;
 
-
+# OR
 
 # Start the deployment from Local File
 
-Write-Host "Starting deployment...";
-if(Test-Path $parametersFilePath) {
-    New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFilePath -TemplateParameterFile $parametersFilePath -Verbose;
+Write-Host "Starting deployment from Local Repo...";
+if(Test-Path $parametersFileURI) {
+    New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFilePath -TemplateParameterUri $parametersFileURI -Verbose;
 } else {
     New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateFile $templateFilePath -Verbose;
 }

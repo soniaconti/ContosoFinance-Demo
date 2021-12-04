@@ -25,7 +25,7 @@
     },
     "hostingPlanName": {
       "type": "string",
-      "defaultValue": "IaC-Demo-Plan",
+      "defaultValue": "ContosoFinance-Demo-Plan",
       "metadata": {
         "description": "Select name for App Service Plan"
       }
@@ -33,7 +33,7 @@
 
     "webappname": {
       "type": "string",
-      "defaultValue": "IaC-Demo-site",
+      "defaultValue": "ContosoFinance-Demo-site",
       "metadata": {
         "description": "Select name for Web App"
       }
@@ -42,7 +42,7 @@
 
     "apiname": {
       "type": "string",
-      "defaultValue": "IaC-Demo-Api",
+      "defaultValue": "ContosoFinance-Demo-Api",
       "metadata": {
         "description": "Select name for API App"
       }
@@ -50,7 +50,7 @@
 
     "sqlserverName": {
       "type": "string",
-      "defaultValue": "IaC-Demo-sql",
+      "defaultValue": "ContosoFinance-Demo-sql",
       "metadata": {
         "description": "Select name for SQL Server"
       }
@@ -58,7 +58,7 @@
 
     "databaseName": {
       "type": "string",
-      "defaultValue": "iacdemodb",
+      "defaultValue": "contosofinancedemodb",
       "metadata": {
         "description": "Select name for database"
       }
