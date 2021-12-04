@@ -120,9 +120,9 @@
     "cleanString": "[replace(variables('removeChar3'), ')', '')]",
     "databasename": "[tolower(concat(variables('cleanString'),'db'))]",
 
-    "repoURL": "https://github.com/SoniaConti/ContosoFinance-Demo.git",
+    "repoURL": "https://github.com/SoniaConti/ContosoFinance-Demo-Web.git",
     "branch": "master",
-    "APIrepoURL": "https://github.com/SoniaConti/ContosoFinance-Demo/blob/ebefb4fc3daa537b831d4cf4d7efa4f2bf16c268/ContosoFinance-Demo-API"
+    "APIrepoURL": "https://github.com/SoniaConti/ContosoFinance-Demo-API.git"
 
   },
   "resources": [
