@@ -40,8 +40,9 @@ To deploy your first website using Azure App Service you will need
 1. Clone this repositorary locally.
 2. Open [deploy.ps1](https://github.com/SoniaConti/ContosoFinance-Demo/blob/f90588a64800ca5fe0d61391fead516042333bc4/ContosoFinance-Demo-ARM/deploy.ps1) in visual studio code or PowerShell ISE.
 
-    This PowerShell script will connect to your azure subscription and deployes 
+    This PowerShell script will connect to your azure subscription and deployes all the resouces as shown below. 
 
+![DeploymentDiagram](https://github.com/SoniaConti/ContosoFinance-Demo/blob/main/ContosoFinance-Demo-ARM/Images/DeploymentDiagram.PNG)
 # Build and Test
 TODO: Describe and show how to build your code and run the tests. 
 
