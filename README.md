@@ -35,21 +35,18 @@ To deploy your first website using Azure App Service you will need
 2. [Visual Studio Code](https://code.visualstudio.com/download)
 3. [GitHub Repository](github.com)
 
-# Getting Started
+# Deploy ContosoFinance Web App
 
 1. Clone this repositorary locally.
 2. Open [deploy.ps1](https://github.com/SoniaConti/ContosoFinance-Demo/blob/f90588a64800ca5fe0d61391fead516042333bc4/ContosoFinance-Demo-ARM/deploy.ps1) in visual studio code or PowerShell ISE.
 
-    This PowerShell script will connect to your azure subscription and deployes all the resouces as shown below. 
+    This PowerShell script is the master script that will connect to your azure subscription and deployes all the resouces as shown below. 
 
 ![DeploymentDiagram](https://github.com/SoniaConti/ContosoFinance-Demo/blob/main/ContosoFinance-Demo-ARM/Images/DeploymentDiagram.PNG)
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+3. When running this script the following resouces will show up in the Azure Portal
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+![DeployedResources](https://github.com/SoniaConti/ContosoFinance-Demo/blob/main/ContosoFinance-Demo-ARM/Images/DeployedResources.PNG)
+
+
+
