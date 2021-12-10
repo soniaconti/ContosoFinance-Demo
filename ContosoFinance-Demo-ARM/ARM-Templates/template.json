@@ -317,7 +317,7 @@
               "sku": {
                   "name": "Free"
               },
-              "retentionInDays": 120,
+              "retentionInDays": 7,
               "features": {
                   "searchVersion": 1,
                   "legacy": 0,
