@@ -119,8 +119,6 @@
     "removeChar3": "[replace(variables('removeChar2'), '^', '')]",
     "cleanString": "[replace(variables('removeChar3'), ')', '')]",
     "databasename": "[tolower(concat(variables('cleanString'),'db'))]",
-    "appinsightsname" : "[concat(parameters('ProjectName'),'-appi')]",
-    "workspaceName" : "[concat(parameters('ProjectName'),'-la')]",
     "repoURL": "https://github.com/SoniaConti/ContosoFinance-Demo-Web.git",
     "branch": "master",
     "APIrepoURL": "https://github.com/SoniaConti/ContosoFinance-Demo-API.git"
@@ -288,42 +286,6 @@
           }
         }
       ]
-    },
-
-    {
-      "type": "Microsoft.Insights/components",
-      "apiVersion": "2020-02-02",
-      "name": "[variables('appinsightsname')]",
-      "location": "[parameters('location')]",
-      "tags": {
-        "[format('hidden-link:{0}', resourceId('Microsoft.Web/sites', parameters('webappName')))]": "Resource",
-        "displayName": "AppInsightsComponent"
-      },
-      "kind": "web",
-      "properties": {
-        "Application_Type": "web"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/sites', parameters('webappName'))]"
-      ]
-    },
-
-    {
-          "type": "Microsoft.OperationalInsights/workspaces",
-          "name": "[variables('workspaceName')]",
-          "apiVersion": "2020-08-01",
-          "location": "[parameters('location')]",
-          "properties": {
-              "sku": {
-                  "name": "Free"
-              },
-              "retentionInDays": 7,
-              "features": {
-                  "searchVersion": 1,
-                  "legacy": 0,
-                  "enableLogAccessUsingOnlyResourcePermissions": true
-              }
-          }
-      }
+    } 
   ]
 }
