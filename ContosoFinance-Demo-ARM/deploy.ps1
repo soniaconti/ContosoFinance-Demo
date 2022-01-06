@@ -70,6 +70,12 @@ New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri
 
 # OR
 
+
+
+
+
+
+
 # Start the deployment from Local File
 
 Write-Host "Starting deployment from Local Repo...";

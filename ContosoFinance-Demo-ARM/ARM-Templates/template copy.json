@@ -109,6 +109,16 @@
     }
   },
   "variables": {   
+    "hostingplanname": "[concat(parameters('ProjectName'),'-Plan')]",
+    "webappname": "[concat(parameters('ProjectName'),'-Site')]",
+    "apiname": "[concat(parameters('ProjectName'),'-Api')]",
+    "sqlservername": "[concat(parameters('ProjectName'),'-Sql')]",
+
+    "removeChar1": "[replace(parameters('ProjectName'), '-', '')]",
+    "removeChar2": "[replace(variables('removeChar1'), ' ', '')]",
+    "removeChar3": "[replace(variables('removeChar2'), '^', '')]",
+    "cleanString": "[replace(variables('removeChar3'), ')', '')]",
+    "databasename": "[tolower(concat(variables('cleanString'),'db'))]",
     "repoURL": "https://github.com/SoniaConti/ContosoFinance-Demo-Web.git",
     "branch": "master",
     "APIrepoURL": "https://github.com/SoniaConti/ContosoFinance-Demo-API.git"
@@ -180,6 +190,7 @@
       "location": "[resourceGroup().location]",
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
+
       ],
       "properties": {
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('hostingPlanName'))]"
